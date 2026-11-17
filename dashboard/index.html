@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Launch Radar — pre-token protocols ranked by implied value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="mast">
+  <div class="scope" aria-hidden="true"><span class="sweep"></span><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span><span class="blip b1"></span><span class="blip b2"></span><span class="blip b3"></span></div>
+  <div class="mast-text">
+    <p class="kicker">MAKE.FUN BOUNTY · TOKEN-RADAR-01 · MODEL PEER-MULTIPLE-1</p>
+    <h1>Token Launch Radar</h1>
+    <p class="sub">Protocols that record no token yet, ranked by what a launch would be worth if their record stayed as it is — and how to farm each one before it happens.</p>
+    <div class="stats" id="stats"></div>
+  </div>
+</header>
+
+<section class="method">
+  <h2>How the radar prices a launch</h2>
+  <p>Every implied value on this board is one multiplication, computed from the snapshot itself:
+  <strong>implied value = TVL × category multiple × growth factor × maturity factor</strong>.
+  The category multiple is the median market-cap/TVL of the already-listed protocols in the same category in this snapshot — the price the market already pays for a dollar of TVL there — falling back to the overall live median when a category has fewer than three listed peers.
+  The growth factor reads the protocol's 7-day TVL change; the maturity factor reads how long DefiLlama has tracked it with no token recorded.
+  No name is priced by hand: one function scores every row, and each protocol's page shows its own arithmetic.</p>
+</section>
+
+<main id="boardView">
+  <form class="controls" id="controls">
+    <label>Search <input type="search" id="q" placeholder="Name or slug…" autocomplete="off"></label>
+    <label>Chain <select id="chainSel"><option value="">All chains</option></select></label>
+    <label>Category <select id="catSel"><option value="">All categories</option></select></label>
+    <label>Segment <select id="segSel"><option value="all">All rows</option><option value="watch">Watchlist</option><option value="early">Early finds</option></select></label>
+    <label>Sort <select id="sortSel"><option value="rank">Rank</option><option value="implied">Implied value</option><option value="tvl">TVL</option><option value="growth">7d growth</option><option value="age">Age</option></select></label>
+    <p class="count" id="count"></p>
+  </form>
+  <div class="tablewrap">
+    <table class="board">
+      <thead><tr>
+        <th class="num">#</th><th>Protocol</th><th>Category</th><th>Chains</th>
+        <th class="num">TVL</th><th class="num">7d</th><th class="num">Age</th>
+        <th class="num">Mult</th><th class="num">Implied value</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <p class="hint">Select any row for its detail view: the full arithmetic behind its implied value and its farm plan.</p>
+</main>
+
+<main id="detailView" hidden></main>
+
+<footer>
+  <p>Implied values are this radar's own model claims, computed from one sealed DefiLlama snapshot; they are not predictions that a token will launch, or what it would trade at. A protocol listed here records no token in the snapshot — that is a statement about the record, not proof that none exists. Farm plans carry real cost and real risk; size positions accordingly.</p>
+  <p class="foot-line">Token Launch Radar · snapshot <span id="footDate"></span> · every figure on this page is computed from that snapshot by the model named above.</p>
+</footer>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

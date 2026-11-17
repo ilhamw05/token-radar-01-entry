@@ -1,0 +1,137 @@
+/* Token Launch Radar — dark scope theme. Deep ink, phosphor teal, amber watch marks, mono numerals. */
+:root {
+  --ink: #060b12;
+  --panel: #0b1521;
+  --panel2: #0e1a29;
+  --line: #1c3049;
+  --line2: #27435f;
+  --text: #d8e6f0;
+  --muted: #7e97ab;
+  --teal: #35f2c0;
+  --teal-dim: #1a9e7c;
+  --amber: #ffb454;
+  --green: #3ddc97;
+  --red: #ff7070;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  --sans: "Avenir Next", "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--ink); }
+body {
+  margin: 0 auto; max-width: 1240px; padding: 0 22px 40px;
+  color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.45;
+  background:
+    radial-gradient(rgba(53, 242, 192, 0.05) 1px, transparent 1.4px) 0 0 / 26px 26px,
+    linear-gradient(180deg, #081120 0, var(--ink) 340px);
+}
+a { color: var(--teal); }
+
+/* Masthead with the radar scope */
+.mast { display: flex; gap: 26px; align-items: center; padding: 30px 0 22px; border-bottom: 1px solid var(--line); }
+.scope {
+  position: relative; flex: 0 0 auto; width: 124px; height: 124px; border-radius: 50%;
+  border: 1px solid var(--line2); overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, #0d2033 0, #081423 70%);
+  box-shadow: 0 0 0 6px rgba(53, 242, 192, 0.04), 0 0 34px rgba(53, 242, 192, 0.10) inset;
+}
+.scope .ring { position: absolute; border: 1px solid rgba(53, 242, 192, 0.22); border-radius: 50%; }
+.scope .r1 { inset: 14px; } .scope .r2 { inset: 32px; } .scope .r3 { inset: 50px; }
+.scope::before, .scope::after { content: ""; position: absolute; background: rgba(53, 242, 192, 0.16); }
+.scope::before { left: 50%; top: 0; bottom: 0; width: 1px; }
+.scope::after { top: 50%; left: 0; right: 0; height: 1px; }
+.scope .sweep {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(53, 242, 192, 0.55), rgba(53, 242, 192, 0.10) 55deg, transparent 80deg);
+  animation: sweep 6s linear infinite;
+}
+@keyframes sweep { to { transform: rotate(360deg); } }
+.scope .blip { position: absolute; width: 6px; height: 6px; border-radius: 50%; }
+.scope .b1 { left: 30px; top: 38px; background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+.scope .b2 { left: 82px; top: 66px; background: var(--amber); box-shadow: 0 0 8px var(--amber); }
+.scope .b3 { left: 58px; top: 92px; background: var(--teal); box-shadow: 0 0 8px var(--teal); opacity: .7; }
+.kicker { margin: 0 0 6px; font-family: var(--mono); font-size: 11px; letter-spacing: .18em; color: var(--teal-dim); }
+h1 { margin: 0; font-size: 40px; letter-spacing: .01em; line-height: 1.05; font-weight: 700; }
+.sub { margin: 8px 0 0; max-width: 760px; color: var(--muted); font-size: 16px; }
+.stats { display: flex; flex-wrap: wrap; gap: 12px 34px; margin-top: 18px; }
+.stat .v { display: block; font-family: var(--mono); font-size: 24px; color: var(--teal); }
+.stat .k { display: block; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+.stat.amber .v { color: var(--amber); }
+
+/* Methodology band */
+.method { margin: 22px 0 6px; padding: 16px 20px; background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--teal-dim); border-radius: 6px; }
+.method h2 { margin: 0 0 6px; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); }
+.method p { margin: 0; color: #b9cbda; }
+.method strong { color: var(--text); font-family: var(--mono); font-weight: 600; font-size: 14px; }
+
+/* Controls */
+.controls { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: end; padding: 18px 0 10px; }
+.controls label { display: flex; flex-direction: column; gap: 5px; font-size: 11px; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); }
+.controls input, .controls select {
+  font: 14px var(--sans); color: var(--text); background: var(--panel2);
+  border: 1px solid var(--line2); border-radius: 5px; padding: 8px 10px; min-width: 150px;
+}
+.controls input:focus, .controls select:focus { outline: 1px solid var(--teal-dim); border-color: var(--teal-dim); }
+.controls .count { margin: 0 0 9px auto; font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.controls .count b { color: var(--teal); font-weight: 600; }
+
+/* Board table */
+.tablewrap { border: 1px solid var(--line); border-radius: 6px; overflow: auto; background: rgba(9, 17, 28, .72); }
+table.board { width: 100%; border-collapse: collapse; font-size: 14px; }
+.board thead th {
+  position: sticky; top: 0; z-index: 1; background: var(--panel2); color: var(--muted);
+  font-size: 11px; letter-spacing: .13em; text-transform: uppercase; font-weight: 600;
+  text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line2); white-space: nowrap;
+}
+.board td { padding: 8px 12px; border-bottom: 1px solid rgba(28, 48, 73, .55); white-space: nowrap; }
+.board tbody tr { cursor: pointer; }
+.board tbody tr:hover { background: rgba(53, 242, 192, .055); }
+.board .num { text-align: right; font-family: var(--mono); font-size: 13.5px; }
+.board th.num { text-align: right; }
+.board .rk { color: var(--muted); }
+.board .nm { font-weight: 600; color: var(--text); }
+.board .cat, .board .ch { color: var(--muted); }
+.board .imp { color: var(--teal); font-weight: 600; }
+.pos { color: var(--green); } .neg { color: var(--red); } .flat { color: var(--muted); }
+.tag { display: inline-block; margin-left: 8px; padding: 1px 6px; border-radius: 3px; font-family: var(--mono); font-size: 10px; letter-spacing: .08em; vertical-align: 2px; }
+.tag.watch { color: #14100a; background: var(--amber); font-weight: 700; }
+.tag.early { color: var(--teal); border: 1px solid var(--teal-dim); }
+.hint { color: var(--muted); font-size: 13px; margin: 10px 2px 0; }
+
+/* Detail view */
+.back { display: inline-block; margin: 22px 0 4px; font-family: var(--mono); font-size: 13px; text-decoration: none; }
+.back:hover { text-decoration: underline; }
+.detail-head h2 { margin: 6px 0 2px; font-size: 32px; line-height: 1.1; }
+.detail-head .slugline { font-family: var(--mono); color: var(--muted); font-size: 13px; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 20px 0; }
+.stat-card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; }
+.stat-card .k { font-size: 11px; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); }
+.stat-card .v { font-family: var(--mono); font-size: 19px; margin-top: 4px; color: var(--text); }
+.chainline { font-family: var(--mono); font-size: 12.5px; color: var(--muted); margin: -8px 0 18px; }
+.stat-card .v.teal { color: var(--teal); }
+.why { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--amber); border-radius: 6px; padding: 16px 20px; margin: 0 0 22px; }
+.why h3, .plan h3 { margin: 0 0 8px; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); }
+.why .formula { font-family: var(--mono); font-size: 17px; color: var(--text); margin: 6px 0 10px; overflow-x: auto; white-space: nowrap; }
+.why .formula b { color: var(--amber); font-weight: 600; }
+.why p { margin: 0; color: #b9cbda; }
+.plan ol { margin: 0; padding: 0; list-style: none; counter-reset: step; }
+.plan li {
+  counter-increment: step; position: relative; margin: 0 0 10px; padding: 13px 16px 13px 52px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 6px; color: #c4d5e2;
+}
+.plan li::before {
+  content: counter(step); position: absolute; left: 14px; top: 12px;
+  width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--teal-dim);
+  color: var(--teal); font-family: var(--mono); font-size: 13px; text-align: center; line-height: 26px;
+}
+
+/* Footer */
+footer { margin-top: 34px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+footer p { margin: 0 0 8px; max-width: 900px; }
+.foot-line { font-family: var(--mono); font-size: 12px; }
+
+@media (max-width: 900px) {
+  h1 { font-size: 30px; }
+  .scope { width: 84px; height: 84px; }
+  .board .cat, .board .ch { display: none; }
+  .board thead .cat, .board thead .ch { display: none; }
+}
